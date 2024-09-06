@@ -23,7 +23,7 @@
       #EX: [SERVER][FEAT]: Comunicação com ESP32
     ```
 
-**Use Branches**: Crie branches para novas funcionalidades, correções de bugs ou experimentos. Isso mantém o branch principal (geralmente main ou master) estável e limpo.
+- **Use Branches**: Crie branches para novas funcionalidades, correções de bugs ou experimentos. Isso mantém o branch principal (geralmente main ou master) estável e limpo.
 
 Como o repositório abrange diferentes escopos, cada um terá sua própria branch:
 - Server
