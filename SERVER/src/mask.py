@@ -1,3 +1,6 @@
+#TODO: receber o frame da ESP32
+#TODO: aplicar a mascara sobre ele
+
 from libs import *
 from utils import parse_arguments
 from colors import RED_LOWER, RED_UPPER, BLACK
