@@ -1,7 +1,7 @@
 #EXTERNO
 import cv2 as cv
 import imutils
-import numpy
+import numpy as np
 
 #NATIVO
 from collections import deque
