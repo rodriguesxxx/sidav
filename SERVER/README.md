@@ -6,6 +6,12 @@
 
 #### - pip3(<a href="https://www.activestate.com/resources/quick-reads/how-to-install-and-use-pip3">link</a>)
 
+## Criando ambiente
+
+```bash
+python -m venv env
+```
+
 ## Iniciando ambiente
 
 **Windows**:
@@ -23,21 +29,14 @@ env\Scripts\Activate.ps1
 source env/bin/activate
 ```
 
+---
+
 ## Certificando o ambiente
 
 Sempre que for instalar uma dependência com o `pip`, certifique-se de que o ambiente esteja ativado.
 
-**Windows**:
+## Instalando as dependências
 
 ```bash
-# Em cmd.exe
-env\Scripts\activate.bat
-# Em PowerShell
-env\Scripts\Activate.ps1
-```
-
-**Linux**:
-
-```bash
-source env/bin/activate
+pip install -r requirements.txt
 ```
