@@ -1,14 +1,20 @@
 #include <Arduino.h>
+#include "Wireless.h"
 
-int myFunction(int, int);
+//SSID | PASSWORD
+Wireless wireless("IGNIS", "SNCTproject2024");
 
 void setup() {
-  int result = myFunction(2, 3);
+  Serial.begin(115200);
+  bool status = wireless.connect();
+
+  if(!status) {
+    Serial.println("Erro ao se conectar a rede wifi! Reinicie a ESP32");
+    while(true);
+  }
+
 }
 
 void loop() {
-}
-
-int myFunction(int x, int y) {
-  return x + y;
+  Serial.println("Passou de boa!");
 }
