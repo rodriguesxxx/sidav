@@ -2,6 +2,9 @@
 import cv2 as cv
 import imutils
 import numpy as np
+import jinja2
+import aiohttp_jinja2
+from aiohttp import web
 
 #NATIVO
 from collections import deque
