@@ -7,7 +7,6 @@
 Wireless wireless("IGNIS", "SNCTproject2024");
 
 WebSocket ws;
-WebSocketsClient client;
 
 void setup() {
   Serial.begin(115200);
@@ -18,9 +17,10 @@ void setup() {
     while(true);
   }
 
-  client = ws.attempt();
+  ws.attempt();
 }
 
 void loop() {
-  Serial.println("Passou de boa!");
+  ws.loop();
+  Serial.println(ws.isConnected());
 }

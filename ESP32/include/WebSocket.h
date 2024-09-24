@@ -1,9 +1,7 @@
+#ifndef WEBSOCKET_H
+#define WEBSOCKET_H
 #include <WebSocketsClient.h>
-
-#ifndef __WEBSOCKET__
-    #define __WEBSOCKET__
-
-    class WebSocket {
+class WebSocket : public WebSocketsClient {
         private:
             char *ip, *route;
             int port;
@@ -13,8 +11,7 @@
         public:
             WebSocket();
             WebSocket(char *ip, int port, char *route);
-            WebSocketsClient attempt();
-
+            void attempt();
     };
 
 #endif

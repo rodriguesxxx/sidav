@@ -41,9 +41,7 @@ void WebSocket::event(WStype_t type, uint8_t * payload, size_t length) {
     }
 }
 
-WebSocketsClient WebSocket::attempt() {
-    wsClient.begin(ip, port, route);
-    wsClient.onEvent(WebSocket::event);
-    return wsClient;
-}
-
+void WebSocket::attempt() {
+    begin(ip, port, route);
+    onEvent(WebSocket::event);
+}       
