@@ -10,7 +10,7 @@ bool Wireless::connect() {
     
     while(WiFi.status() != WL_CONNECTED) {
         delay(500);
-        Serial.printf("Tentando se conectar a rede: %s\n", ssid); // Adicionado %s para imprimir o ssid
+        Serial.printf("Tentando se conectar a rede: %s\n", ssid);
     }
 
     return (WiFi.status() == WL_CONNECTED ) ? true : false; 
