@@ -6,7 +6,8 @@
 //SSID | PASSWORD
 Wireless wireless("IGNIS", "SNCTproject2024");
 
-WebSocket ws;
+WebSocket wsSerial;
+WebSocket wsCam;
 
 void setup() {
   Serial.begin(115200);
@@ -17,10 +18,15 @@ void setup() {
     while(true);
   }
 
-  ws.attempt();
+  wsSerial.route = "/api/ws/serial";
+  wsSerial.attempt();
+
+  wsCam.route = "/api/ws/cam";
+  wsCam.attempt();
 }
 
 void loop() {
-  ws.loop();
-  Serial.println(ws.isConnected());
+  wsSerial.loop();
+  wsCam.loop();
+  wsSerial.sendTXT("TESTE");
 }

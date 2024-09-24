@@ -1,7 +1,7 @@
 #include "WebSocket.h"
 
 WebSocket::WebSocket() {
-    this->ip = "192.168.0.100";   
+    this->ip = "192.168.0.101";   
     this->port = 8080;   
     this->route = "/api/ws";   
 }
