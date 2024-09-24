@@ -1,8 +1,13 @@
 #include <Arduino.h>
 #include "Wireless.h"
+#include "WebSocket.h"
+
 
 //SSID | PASSWORD
 Wireless wireless("IGNIS", "SNCTproject2024");
+
+WebSocket ws;
+WebSocketsClient client;
 
 void setup() {
   Serial.begin(115200);
@@ -13,6 +18,7 @@ void setup() {
     while(true);
   }
 
+  client = ws.attempt();
 }
 
 void loop() {

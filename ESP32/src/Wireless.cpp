@@ -2,7 +2,7 @@
 
 Wireless::Wireless(char *ssid, char *passwd) {
     this->ssid = ssid;
-    this->passwd = passwd; // Corrigido aqui
+    this->passwd = passwd;
 }
 
 bool Wireless::connect() {
