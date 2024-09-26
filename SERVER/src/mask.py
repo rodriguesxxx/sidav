@@ -2,18 +2,18 @@
 #TODO: aplicar a mascara sobre ele
 
 from libs import *
-from utils import parse_arguments
+from utils2 import parse_arguments
 from colors import RED_LOWER, RED_UPPER, BLACK
 
+model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True) # carrega o modelo de detecção do YOLO
 
-def __initialize_camera(args):
+def __initialize_camera(args): # inicializa a camera
     if not args.get("video", False):
         return cv.VideoCapture(0)  # webcam
     else:
         return cv.VideoCapture(args["video"])
 
-def __process_frame(frame):
-
+def __process_frame(frame): # processa, formata e retorna o frame com a detecção do objeto por cor  
     frame = imutils.resize(frame, width=720)
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
 
@@ -34,25 +34,39 @@ def __process_frame(frame):
         cv.drawContours(frame, [box], 0, BLACK, 2)
 
     return frame
+
+def _detection_people(frame): # usa o YOLO para detecção de pessoas
+    results = model(frame)
+    pred = results.pandas().xyxy[0]
+
+    for index, row in pred.iterrows():
+        box = [int(x) for x in row[['xmin', 'ymin', 'xmax', 'ymax']]] #retorna o "x" inicial, o "y" inicial, o "x" final e o "y" final para a demarcação da caixa delimitadora 
+        confidence = round(row['confidence'] * 100, 0) # retorna a taxa de confiança da deteção em porcentagem
+        class_id = int(row['class'])
+
+        if class_id == 0: # checa se o id da classe é a mesma da classe "person"
+            cv.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 2)
+            cv.putText(frame, f'Pessoa {confidence}%', (box[0], box[1] - 10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+        
+        return __process_frame(frame)
    
 def init() -> None:
     args = parse_arguments(ArgumentParser())
-    
     cam = __initialize_camera(args)
 
     try:
         while True:
-            
             grabbed, frame = cam.read()
             
             if args.get("video") and not grabbed:
                 break
 
-            frame = __process_frame(frame)
+            _detection_people(frame=frame)
             cv.imshow("Frame", frame)
-
+            
             if cv.waitKey(1) & 0xFF == ord('s'):
                 break
+
     except Exception as e:
         print(f"Erro inesperado: {e}")
     finally:
