@@ -1,7 +1,7 @@
 # ignis
 ## Sistema de Detecção de Incêndios com Drone e Algoritmo de Visão Computacional
 
-Em 2023, o Brasil enfrentou a destruição de mais de 16,2 milhões de hectares
+ 2023, o Brasil enfrentou a destruição de mais de 16,2 milhões de hectares
 devido a incêndios, o que equivale a aproximadamente 16 milhões de campos de futebol
 do tamanho do Maracanã. Os incêndios florestais representam uma ameaça crescente
 para o meio ambiente, biodiversidade e comunidades humanas, especialmente em um
