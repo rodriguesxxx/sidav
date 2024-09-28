@@ -7,6 +7,20 @@ from colors import RED_LOWER, RED_UPPER, BLACK
 
 model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True) # carrega o modelo de detecção do YOLO
 
+class_names = { # dicionário com os nomes traduzidos das classes a serem identificadas  
+  0:  'Pessoa',
+  14: 'Passaro',
+  15: 'Gato',
+  16: 'Cachorro',
+  17: 'Cavalo',
+  18: 'Ovelha',
+  19: 'Vaca',
+  20: 'Elefante',
+  21: 'Urso',
+  22: 'Zebra',
+  23: 'Girafa'
+}
+
 def __initialize_camera(args): # inicializa a camera
     if not args.get("video", False):
         return cv.VideoCapture(0)  # webcam
@@ -35,21 +49,26 @@ def __process_frame(frame): # processa, formata e retorna o frame com a detecç�
 
     return frame
 
-def _detection_people(frame): # usa o YOLO para detecção de pessoas
+def _general_detection(frame, list_id_classes): # usa o YOLO para detecção de pessoas e animais
     results = model(frame)
     pred = results.pandas().xyxy[0]
 
     for index, row in pred.iterrows():
         box = [int(x) for x in row[['xmin', 'ymin', 'xmax', 'ymax']]] #retorna o "x" inicial, o "y" inicial, o "x" final e o "y" final para a demarcação da caixa delimitadora 
         confidence = round(row['confidence'] * 100, 0) # retorna a taxa de confiança da deteção em porcentagem
-        class_id = int(row['class'])
-
-        if class_id == 0: # checa se o id da classe é a mesma da classe "person"
-            cv.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 2)
-            cv.putText(frame, f'Pessoa {confidence}%', (box[0], box[1] - 10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+        id_identified = int(row['class'])
         
-        return __process_frame(frame)
-   
+        if list_id_classes != 0:
+            for i in list_id_classes: 
+                if i == id_identified: # verifica se o ID identificado corresponde a algum dos IDs passados por parametro no array "list_id_classes"
+                    class_name = class_names[i] # caso seja, recupera o nome da classes pelo ID no dicionário "class_names"
+                    cv.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (255, 0, 0), 2)
+                    cv.putText(frame, f'{class_name} {confidence}%', (box[0], box[1] - 10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        else:
+            print("Lista de IDs vazia!")
+
+        return __process_frame(frame)    
+
 def init() -> None:
     args = parse_arguments(ArgumentParser())
     cam = __initialize_camera(args)
@@ -61,7 +80,7 @@ def init() -> None:
             if args.get("video") and not grabbed:
                 break
 
-            _detection_people(frame=frame)
+            _general_detection(frame=frame, list_id_classes=[0,14,15,16,17,18,19,20,21,22,23])
             cv.imshow("Frame", frame)
             
             if cv.waitKey(1) & 0xFF == ord('s'):
