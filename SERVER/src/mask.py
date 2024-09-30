@@ -5,7 +5,10 @@ from libs import *
 from utils2 import parse_arguments
 from colors import RED_LOWER, RED_UPPER, BLACK
 
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True) # carrega o modelo de detecção do YOLO
+id_classes = [0,14,15,16,17,18,19,20,21,22,23] # IDs das classes a serem identificadas 
+
+model = torch.hub.load('ultralytics/yolov5', 'yolov5n', pretrained=True) # carrega o modelo de detecção do YOLO
+model.classes = id_classes # apenas essas classes serão detectadas
 
 class_names = { # dicionário com os nomes traduzidos das classes a serem identificadas  
   0:  'Pessoa',
@@ -49,8 +52,9 @@ def __process_frame(frame): # processa, formata e retorna o frame com a detecç�
 
     return frame
 
-def _general_detection(frame, list_id_classes): # usa o YOLO para detecção de pessoas e animais
+def _general_detection(frame): # usa o YOLO para detecção de pessoas e animais
     results = model(frame)
+
     pred = results.pandas().xyxy[0]
 
     for index, row in pred.iterrows():
@@ -58,10 +62,10 @@ def _general_detection(frame, list_id_classes): # usa o YOLO para detecção de 
         confidence = round(row['confidence'] * 100, 0) # retorna a taxa de confiança da deteção em porcentagem
         id_identified = int(row['class'])
         
-        if list_id_classes != 0:
-            for i in list_id_classes: 
+        if id_classes != 0:
+            for i in id_classes:
                 if i == id_identified: # verifica se o ID identificado corresponde a algum dos IDs passados por parametro no array "list_id_classes"
-                    class_name = class_names[i] # caso seja, recupera o nome da classes pelo ID no dicionário "class_names"
+                    class_name = class_names[i] # caso seja, recupera o nome da classe pelo ID no dicionário "class_names"
                     cv.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (255, 0, 0), 2)
                     cv.putText(frame, f'{class_name} {confidence}%', (box[0], box[1] - 10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
         else:
@@ -80,7 +84,7 @@ def init() -> None:
             if args.get("video") and not grabbed:
                 break
 
-            _general_detection(frame=frame, list_id_classes=[0,14,15,16,17,18,19,20,21,22,23])
+            _general_detection(frame=frame)
             cv.imshow("Frame", frame)
             
             if cv.waitKey(1) & 0xFF == ord('s'):
