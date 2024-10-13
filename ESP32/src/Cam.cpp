@@ -30,7 +30,7 @@ void Cam::setup() {
     config.pixel_format = PIXFORMAT_JPEG;
 
     config.frame_size = FRAMESIZE_QVGA;
-    config.jpeg_quality = 5;
+    config.jpeg_quality = 7;
     config.fb_count = 1;
 
     esp_err_t err = esp_camera_init(&config);
@@ -41,11 +41,11 @@ void Cam::setup() {
 
     sensor_t *s = esp_camera_sensor_get();
     s->set_framesize(s, FRAMESIZE_QVGA); // Resolução
-    s->set_quality(s, 5); // Qualidade JPEG (quanto menor o valor, maior a qualidade)
-    s->set_brightness(s, 1); // Brilho (-2 a 2)
-    s->set_contrast(s, 1); // Contraste (-2 a 2)
+    s->set_quality(s, 7); // Qualidade JPEG (quanto menor o valor, maior a qualidade)
+    s->set_brightness(s, 0.8); // Brilho (-2 a 2)
+    s->set_contrast(s, 0.9); // Contraste (-2 a 2)
     s->set_saturation(s, 1); // Saturação (-2 a 2)
-    s->set_sharpness(s, 2); // Nitidez (-2 a 2)
+    s->set_sharpness(s, 1.5); // Nitidez (-2 a 2)
 }
 
 void Cam::live(WebSocket &ws) {

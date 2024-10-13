@@ -1,5 +1,5 @@
 from libs import asyncio, cv, np, base64
-from mask import general_detection, process_frame
+from mask import process_frame, general_detection
 
 def handle_cams(cams_queue, serial_queue):
     loop = asyncio.new_event_loop()

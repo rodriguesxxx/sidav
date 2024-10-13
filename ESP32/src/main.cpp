@@ -38,6 +38,7 @@ void loop() {
     wsCam.loop();
     if(wsCam.isConnected()) {
       cam.live(wsCam);
-      delay(100);
+      // delay(100);
+      delay(10);
     }
 }
