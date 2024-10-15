@@ -7,8 +7,8 @@
 
 
 //SSID | PASSWORD
-// Wireless wireless("IGNIS", "SNCTproject2024");
-Wireless wireless("motog", "elllllly");
+Wireless wireless("IGNIS", "SNCTproject2024");
+// Wireless wireless("motog", "elllllly");
 WebSocket wsSerial;
 WebSocket wsCam;
 Cam cam("drone");

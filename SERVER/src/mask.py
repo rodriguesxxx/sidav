@@ -1,6 +1,6 @@
 from libs import *
 from utils2 import parse_arguments
-from colors import RED_LOWER, RED_UPPER, BLACK
+from colors import *
 
 # model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True) # carrega o modelo de detecção do YOLO
 
@@ -34,7 +34,7 @@ def process_frame(frame):
     frame = imutils.resize(frame, width=720)
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
 
-    mask = cv.inRange(hsv, RED_LOWER, RED_UPPER)
+    mask = cv.inRange(hsv, ORANGE_LOWER, ORANGE_UPPER)
     mask = cv.erode(mask, None, iterations=2)
     mask = cv.dilate(mask, None, iterations=2)
 
@@ -48,7 +48,10 @@ def process_frame(frame):
         box = np.int32(box)
         moments = cv.moments(contour_area)
         red_center_id = (int(moments["m10"] / moments["m00"]), int(moments["m01"] / moments["m00"]))
-        cv.drawContours(frame, [box], 0, BLACK, 2)
+        cv.drawContours(frame, [box], 0, ORANGE_UPPER, 2)
+        
+        cv.putText(frame, "Incendio Detectado", (red_center_id[0] - 50, red_center_id[1] - 10), 
+                   cv.FONT_HERSHEY_SIMPLEX, 0.6, BLACK, 2)
 
     return frame
 
