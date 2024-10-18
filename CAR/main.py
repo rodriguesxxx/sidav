@@ -1,15 +1,9 @@
-import sound
-import movement
-from sensors import color
+import server
 
 def main():
-    
     while True:
-        movement.move_forward()
-        if(color.getColor == 'black'):
-            movement.move_left()
-        
-        #TODO: Verificar se chegou na cor do incendio e acionar sirene
+        server.start()
+
             
 if __name__ == "__main__":
     main()
