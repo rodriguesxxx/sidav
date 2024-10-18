@@ -1,6 +1,7 @@
 from libs import *
 from utils2 import parse_arguments
 from colors import *
+import car
 
 # model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True) # carrega o modelo de detecção do YOLO
 
@@ -52,7 +53,9 @@ def process_frame(frame):
         
         cv.putText(frame, "Incendio Detectado", (red_center_id[0] - 50, red_center_id[1] - 10), 
                    cv.FONT_HERSHEY_SIMPLEX, 0.6, BLACK, 2)
-
+        
+        car.start()
+        
     return frame
 
 # def general_detection(frame, list_id_classes): # usa o YOLO para detecção de pessoas e animais
