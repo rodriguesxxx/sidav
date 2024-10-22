@@ -1,4 +1,4 @@
-# ignis
+# SIDAV
 ## Sistema de Detecção de Incêndios com Drone e Algoritmo de Visão Computacional
 
 Em 2023, o Brasil enfrentou a destruição de mais de 16,2 milhões de hectares
