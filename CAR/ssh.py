@@ -1,3 +1,7 @@
+# ACESSAR SERVIDOR SSH
+#ssh robot@192.168.0.100
+#senha: maker
+
 import os
 
 EV3_IP = '192.168.0.100'

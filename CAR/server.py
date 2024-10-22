@@ -29,26 +29,23 @@ def start():
                 msg = data.decode('utf-8')
                 
                 if msg == 'start':
-                    while True:
-                        movement.move_forward()
-                        if color.getColor() == 'black':
-                            movement.stop()
-                            time.sleep(0.5)
-                            movement.move_left()
-                        elif color.getColor() == 'orange':
-                            movement.stop()
-                            sound.siren()  
-                            # time.sleep(10)
-                            break
+                    go_the_fire()
                 else:
                     print("Err -> mensagem desconhecida recebida: {}".format(msg))
                    
                    
 def go_the_fire():
-    while True:
-        
-        movement.move_forward()
-        if color.getColor() == 'black':
-            movement.stop()
-            time.sleep(0.5)
-            
+    
+    movement.move_forward(seconds=5)
+    time.sleep(0.5)
+    movement.move_left()
+    movement.move_forward(seconds=3)
+    time.sleep(0.5)
+    if color.get() != 'orange':
+        movement.move_backward(seconds=1.5)
+        movement.move_left()
+        movement.move_forward(seconds=4.16)
+    
+    
+    sound.siren()
+

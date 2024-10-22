@@ -8,7 +8,7 @@ __cores = {
     5: 'orange'
 }
 
-def getColor():
+def get():
     detected_color = S1.color
     color = __cores.get(detected_color, 'unknown')
     return color
