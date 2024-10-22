@@ -35,16 +35,15 @@ def start():
                    
                    
 def go_the_fire():
-    
     movement.move_forward(seconds=5)
     time.sleep(0.5)
     movement.move_left()
-    movement.move_forward(seconds=3)
+    movement.move_forward(seconds=3.8)
     time.sleep(0.5)
     if color.get() != 'orange':
         movement.move_backward(seconds=1.5)
-        movement.move_left()
-        movement.move_forward(seconds=4.16)
+        movement.move_left2()
+        movement.move_forward(seconds=3.5)
     
     
     sound.siren()

@@ -4,7 +4,7 @@
 
 import os
 
-EV3_IP = '192.168.0.100'
+EV3_IP = '192.168.0.101'
 EV3_PATH = './'
 PC_PATH = '/home/the-pc/Projects/IFNMG/ignis/CAR'
 TAR_FILE = '/tmp/car_files.tar'
