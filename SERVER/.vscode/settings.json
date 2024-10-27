@@ -1,9 +1,9 @@
 {
-  "C_Cpp_Runner.cCompilerPath": "/home/rodriguesxxx/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc",
-  "C_Cpp_Runner.cppCompilerPath": "/home/rodriguesxxx/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-g++",
-  "C_Cpp_Runner.debuggerPath": "/home/rodriguesxxx/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gdb",
-  "C_Cpp_Runner.cStandard": "gnu99",
-  "C_Cpp_Runner.cppStandard": "gnu++11",
+  "C_Cpp_Runner.cCompilerPath": "gcc",
+  "C_Cpp_Runner.cppCompilerPath": "g++",
+  "C_Cpp_Runner.debuggerPath": "gdb",
+  "C_Cpp_Runner.cStandard": "",
+  "C_Cpp_Runner.cppStandard": "",
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.useMsvc": false,
   "C_Cpp_Runner.warnings": [
@@ -37,11 +37,7 @@
   "C_Cpp_Runner.warningsAsError": false,
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
-  "C_Cpp_Runner.includePaths": [
-    "/home/rodriguesxxx/Projects/IFNMG/ignis/ESP32/include",
-    "/home/rodriguesxxx/Projects/IFNMG/ignis/ESP32/src",
-    ""
-  ],
+  "C_Cpp_Runner.includePaths": [],
   "C_Cpp_Runner.includeSearch": [
     "*",
     "**/*"

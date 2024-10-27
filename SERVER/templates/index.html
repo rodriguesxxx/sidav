@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IGNIS - DETECÇÃO DE INCÊNDIO COM DRONE E VISÃO COMPUTACIONAL</title>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            #live {
+                max-width: 100%;
+                height: auto;
+                border: 5px solid #333;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+            }
+
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+
+            .container {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>IGNIS - DETECÇÃO DE INCÊNDIO COM DRONE E VISÃO COMPUTACIONAL</h1>
+            <img id="live" src="" />
+        </div>
+
+        <script>
+            jQuery(function ($) {
+                if (!("WebSocket" in window)) {
+                    alert("Your browser does not support web sockets");
+                } else {
+                    setup();
+                }
+
+                function setup() {
+                    var host = "ws://192.168.0.101:8080/api/ws/serial";
+                    //var host = "ws://192.168.43.98:8080/api/ws/serial";
+                    var socket = new WebSocket(host);
+                    socket.binaryType = "arraybuffer";
+
+                    if (socket) {
+                        socket.onopen = function () {
+                            console.log("Connection opened");
+                        };
+                        socket.onmessage = function (msg) {
+                            var bytes = msg.data;
+                            var img = document.getElementById("live");
+                            img.src = "data:image/jpg;base64," + bytes;
+                        };
+                        socket.onclose = function () {
+                            console.log("The connection has been closed.");
+                        };
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
