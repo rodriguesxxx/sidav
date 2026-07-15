@@ -128,7 +128,7 @@ sidav/
 ### 1. Clone
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/rodriguesxxx/sidav.git
 cd sidav
 ```
 
@@ -169,7 +169,3 @@ cd server
 pip install pytest pytest-aiohttp
 PYTHONPATH=src python3 -m pytest tests/ -v
 ```
-
-## License
-
-MIT
