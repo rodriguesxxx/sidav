@@ -1,44 +1,32 @@
-//TODO: Corrigir bug do reboot
-
 #include <Arduino.h>
-#include "Wireless.h"
-#include "WebSocket.h"
-#include "Cam.h"
+#include "WiFiManager.h"
+#include "WebSocketClient.h"
+#include "Camera.h"
 
-
-//SSID | PASSWORD
-Wireless wireless("IGNIS", "SNCTproject2024");
-// Wireless wireless("motog", "elllllly");
-WebSocket wsSerial;
-WebSocket wsCam;
-Cam cam("drone");
+WiFiManager wifi("IGNIS", "SNCTproject2024");
+WebSocketClient cameraStream;
+Camera camera("drone");
 
 void setup() {
     Serial.begin(115200);
-    bool status = wireless.connect();
 
-    if(!status) {
-      Serial.println("Erro ao se conectar a rede wifi! Reinicie a ESP32");
-      while(true);
+    if (!wifi.connect()) {
+        Serial.println("WiFi connection failed. Restart the ESP32.");
+        while (true) { delay(1000); }
     }
-      
-    Serial.println("Sucesso ao se conectar a rede WiFi!");
 
-    // wsSerial.route = "/api/ws/serial";
-    // wsSerial.attempt();
+    Serial.println("WiFi connected");
 
-    wsCam.route = "/api/ws/cam";
-    wsCam.attempt();
-    cam.setup();
+    cameraStream.route = "/api/ws/cam";
+    cameraStream.connect();
+    camera.setup();
 }
 
 void loop() {
-    //BUG#1: ERROR DO REBOOTING
-      //BUG#1: [REPORT] RESOLVIDO PARCIALMENTE, CASO PERSISTIR, REINICIE O ROTEADOR/ESP32
-    wsCam.loop();
-    if(wsCam.isConnected()) {
-      cam.live(wsCam);
-      // delay(100);
-      delay(10);
+    cameraStream.loop();
+
+    if (cameraStream.isConnected()) {
+        camera.streamTo(cameraStream);
+        delay(10);
     }
 }
