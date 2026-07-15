@@ -112,24 +112,3 @@ STOP
 ```
 
 The server accumulates frames between START/STOP and processes them as a batch.
-
-## Troubleshooting
-
-### Reboot loop
-- Partially resolved. If persists, restart the WiFi router or ESP32.
-- Known ESP32-CAM power stability issue — use a stable 5V/2A supply.
-
-### WiFi connection fails
-- Check SSID and password
-- Ensure 2.4 GHz network (ESP32 does not support 5 GHz)
-- Verify signal strength at deployment location
-
-### Camera init fails
-- Check camera ribbon cable connection
-- Try lower `xclk_freq_hz` (10 MHz)
-- Ensure adequate power supply
-
-## Quality
-
-- Cyclomatic complexity: all functions ≤ 6 (limit: 10)
-- Measured with `lizard`

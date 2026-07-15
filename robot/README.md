@@ -122,8 +122,3 @@ from robot import sound
 
 sound.siren()  # plays sirene.wav for 30 seconds
 ```
-
-## Quality
-
-- Cyclomatic complexity: all functions ≤ 4 (limit: 10)
-- Measured with `radon cc`

@@ -112,8 +112,3 @@ FRAME_QUEUE_MAXSIZE = 10
 pip install pytest pytest-aiohttp
 PYTHONPATH=src python3 -m pytest tests/ -v
 ```
-
-## Quality
-
-- Cyclomatic complexity: all functions ≤ 8 (limit: 10)
-- Measured with `radon cc`
