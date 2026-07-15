@@ -1,0 +1,36 @@
+# Tracking / Planning files (gitignored)
+PROGRESS.md
+TASKS.md
+AGENTS.md
+SKILLS.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+env/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Environment
+.env
+*.log
